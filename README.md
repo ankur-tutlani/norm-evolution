@@ -41,13 +41,8 @@ This library has one function simulation_function_neighbors. Below are the param
 7. time_period. How long the game should run. (Integer)
 8. percent_share. Percent distribution of strategies among agents. E.g.[0.4,0.4,0.2]. These numbers must add up to 1. Specify in the order of strategies 0,1,2, and so on. (List)	
 9. strategy_pair. Strategy pair. E.g. {0: "H",1: "M",2: "L"}. 0 strategy is 'H', 1 strategy is 'M', and 2 strategy is ‘L’. Count must match with num_strategy argument. Keys would need to be 0,1,2, etc. Value corresponding to keys can be anything in string format. (Dictionary)
-10. payoff_values. List of payoff values. E.g. [[0,0,70],[0,50,50],[30,30,30]]. The first list [0,0,70] is the first row of the 3*3 payoff matrix assuming we have 3 strategies. Second list [0,50,50] is the second row of the payoff matrix and third list [30,30,30] is the third row of payoff matrix. (List)
-It looks something like below
-
-    [0,0,70
-    0,50,50
-    30,30,30]
-11.path_to_save_output. The location where output excel files should be saved. (String)
+10. payoff_values. List of payoff values. E.g. [[0,0,70],[0,50,50],[30,30,30]]. The first list [0,0,70] is the first row of the 3*3 payoff matrix assuming we have 3 strategies. Second list [0,50,50] is the second row of the payoff matrix and third list [30,30,30] is the third row of payoff matrix.(List)
+11. path_to_save_output. The location where output excel files should be saved. (String)
 
 
 
@@ -57,16 +52,15 @@ We explain the underlying functioning of this library with the help of an exampl
 
 We assume there is a Nash demand game wherein each agent can make 3 demands, High (70), Medium (50) or Low (30). The rule of the game is if the total demands made by two agents in any given iteration are more than 100, no one is going to get anything. Below is the payoff matrix of row versus column player looks like.
 
-	      H	      M	       L
+		  H	  M	    L
     H	(0,0)	(0,0)	 (70,30)
     M	(0,0)	(50,50)	 (50,30)
     L	(30,70)	(30,50)	 (30,30)
 
 There are 3 pure strategy Nash equilibria, (H, L), (M, M) and (L, H). There is not a strictly or weakly dominant strategy for any of the row or column player. We assume a circular network wherein each agent is connected with two other agents, one on the left and one on the right like in below image.
-    
-    <p align="center">
-    <img src="norm_evolution_network.png" />
-    </p>
+<p align="center">
+<img src="norm_evolution_network.png" />
+</p>
 
 Agents update their strategy if any of their neighbours (defined by radius) are having higher payoff else, they stick to their own strategy which they have been following. Payoffs are computed as follows. If agent with strategy H meets agent with strategy M and L, then payoff from meeting with strategy M agent equals 0 and payoff from meeting with strategy L agent equals 70, hence the total payoff equals 70. In case of a tie, meaning payoffs are exactly same following current strategy versus payoffs from neighbours’ strategy then agents select their strategy randomly. 
 
