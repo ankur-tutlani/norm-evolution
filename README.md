@@ -63,7 +63,10 @@ We assume there is a Nash demand game wherein each agent can make 3 demands, Hig
     L	(30,70)	(30,50)	 (30,30)
 
 There are 3 pure strategy Nash equilibria, (H, L), (M, M) and (L, H). There is not a strictly or weakly dominant strategy for any of the row or column player. We assume a circular network wherein each agent is connected with two other agents, one on the left and one on the right like in below image.
+
+
     ![Screenshot]( norm_evolution_network.png)
+
 
 Agents update their strategy if any of their neighbours (defined by radius) are having higher payoff else, they stick to their own strategy which they have been following. Payoffs are computed as follows. If agent with strategy H meets agent with strategy M and L, then payoff from meeting with strategy M agent equals 0 and payoff from meeting with strategy L agent equals 70, hence the total payoff equals 70. In case of a tie, meaning payoffs are exactly same following current strategy versus payoffs from neighbours’ strategy then agents select their strategy randomly. 
 
